@@ -6,7 +6,7 @@ const todoSchema = new mongoose.Schema({
   isComplete: { type: Boolean, default: false },
 });
 
-module.exports=mongoose.model("todo",todoSchema);
+module.exports = mongoose.model("todo", todoSchema);
 // module.exports={
 //     todoModel
 // }

@@ -26,15 +26,16 @@ const getTodos = (req, res) => {
     .catch((err) => res.send(err));
 };
 const getTodoById = (req, res) => {
-  const {id}=req.body;
+  const { id } = req.body;
   todoModel
-    .find({_id:id})
+    .find({ _id: id })
     .then((result) => {
       //send give the response as text . json give us the response as json format
       res.send(result);
     })
     .catch((err) => res.send(err));
 };
+// soft delete
 const deleteTodo = (req, res) => {
   const { id } = req.body;
   todoModel
@@ -42,6 +43,7 @@ const deleteTodo = (req, res) => {
     .then((result) => res.send(result))
     .catch((err) => res.send(err));
 };
+//update spacifec task by id
 const updateTodo = (req, res) => {
   const { name } = req.body;
   const { id } = req.body;
@@ -50,6 +52,25 @@ const updateTodo = (req, res) => {
     .then((result) => res.send(result))
     .catch((err) => res.send(err));
 };
+const daleteTodoById = (req, res) => {
+  const { id } = req.body;
+  todoModel
+    .deleteOne({ _id: id })
+    .then((result) => res.send(result))
+    .catch((err) => res.send(err));
+};
+const daleteTodos = (req, res) => {
+  todoModel
+    .deleteMany({})
+    .then((result) => res.send(result).catch((err) => res.send(err)));
+};
 // import functions to use them in routes folder
-module.exports = { createTodo, getTodos, deleteTodo, updateTodo,getTodoById };
-
+module.exports = {
+  createTodo,
+  getTodos,
+  deleteTodo,
+  updateTodo,
+  getTodoById,
+  daleteTodoById,
+  daleteTodos,
+};
